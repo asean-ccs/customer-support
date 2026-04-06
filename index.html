@@ -50,6 +50,12 @@
       justify-content: center;
     }
 
+    .app-icon img {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+    }
+
     .app-title {
       font-size: 26px;
       font-weight: 700;
@@ -101,27 +107,9 @@
 <body>
   <div class="card">
 
-    <!-- Nissan Logo Icon -->
+    <!-- App Icon — replace icon.png with your actual filename -->
     <div class="app-icon">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" width="64" height="38">
-        <!-- Outer oval ring -->
-        <ellipse cx="100" cy="60" rx="95" ry="53" fill="none" stroke="#111" stroke-width="8"/>
-        <!-- Band white fill -->
-        <rect x="5" y="45" width="190" height="30" fill="#f0f0f0"/>
-        <!-- Band top border -->
-        <rect x="5" y="45" width="190" height="6" fill="#111"/>
-        <!-- Band bottom border -->
-        <rect x="5" y="69" width="190" height="6" fill="#111"/>
-        <!-- NISSAN text -->
-        <text x="100" y="60"
-              text-anchor="middle"
-              dominant-baseline="middle"
-              font-family="'Arial Black', Arial, sans-serif"
-              font-size="24"
-              font-weight="900"
-              letter-spacing="6"
-              fill="#111">NISSAN</text>
-      </svg>
+      <img src="icon.png" alt="MyNISSAN Connect" />
     </div>
 
     <h1 class="app-title">MyNISSAN Connect</h1>
