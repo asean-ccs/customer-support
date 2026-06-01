@@ -4,22 +4,35 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MyNISSAN Connect</title>
-
   <script>
+    var PKG = "jp.co.nissan.nissanconnectservices";
+    var PLAY_WEB = "https://play.google.com/store/apps/details?id=" + PKG;
+    // Android intent: opens the Play Store APP directly even from in-app browsers
+    // (Line / Facebook / Messenger), with a web fallback if the app isn't installed.
+    var PLAY_INTENT =
+      "intent://details?id=" + PKG +
+      "#Intent;scheme=market;package=com.android.vending;" +
+      "S.browser_fallback_url=" + encodeURIComponent(PLAY_WEB) + ";end";
+    var APPSTORE = "https://apps.apple.com/th/app/nissanconnect-services/id6446879593";
+
     var ua = navigator.userAgent;
     var isIOS = /iPad|iPhone|iPod/.test(ua);
     var isAndroid = /Android/.test(ua);
 
     if (isAndroid) {
-      window.location.replace("https://play.google.com/store/apps/details?id=jp.co.nissan.nissanconnectservices");
+      window.location.replace(PLAY_INTENT);
     } else if (isIOS) {
-      window.location.replace("https://apps.apple.com/th/app/nissanconnect-services/id6446879593");
+      window.location.replace(APPSTORE);
     }
-  </script>
 
+    // Point the visible Google Play button at the right target per platform.
+    document.addEventListener("DOMContentLoaded", function () {
+      var btn = document.getElementById("playBtn");
+      if (btn && isAndroid) btn.setAttribute("href", PLAY_INTENT);
+    });
+  </script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
       display: flex;
       justify-content: center;
@@ -28,7 +41,6 @@
       background-color: #1a1a1a;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
-
     .card {
       background: #ffffff;
       border-radius: 24px;
@@ -39,7 +51,6 @@
       align-items: center;
       gap: 16px;
     }
-
     .app-icon {
       width: 80px;
       height: 80px;
@@ -49,27 +60,23 @@
       align-items: center;
       justify-content: center;
     }
-
    .app-icon img {
       width: 80%;
       height: 80%;
       object-fit: cover;
       border-radius: 18px;
 }
-
     .app-title {
       font-size: 26px;
       font-weight: 700;
       color: #111;
       margin-top: 4px;
     }
-
     .app-subtitle {
       font-size: 15px;
       color: #888;
       text-align: center;
     }
-
     .buttons {
       display: flex;
       flex-direction: column;
@@ -77,7 +84,6 @@
       width: 100%;
       margin-top: 8px;
     }
-
     .btn {
       display: flex;
       align-items: center;
@@ -93,11 +99,9 @@
       color: #fff;
       transition: opacity 0.2s;
     }
-
     .btn:hover { opacity: 0.9; }
     .btn-appstore { background-color: #111; }
     .btn-googleplay { background-color: #4a7c59; }
-
     .footer-text {
       font-size: 13px;
       color: #aaa;
@@ -107,15 +111,12 @@
 </head>
 <body>
   <div class="card">
-
     <!-- App Icon — replace icon.png with your actual filename -->
     <div class="app-icon">
       <img src="icon.png" alt="MyNISSAN Connect" />
     </div>
-
     <h1 class="app-title">MyNISSAN Connect</h1>
     <p class="app-subtitle">Select your platform to download</p>
-
     <div class="buttons">
       <a href="https://apps.apple.com/th/app/nissanconnect-services/id6446879593" class="btn btn-appstore">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
@@ -123,15 +124,13 @@
         </svg>
         Download on App Store
       </a>
-
-      <a href="https://play.google.com/store/apps/details?id=jp.co.nissan.nissanconnectservices" class="btn btn-googleplay">
+      <a id="playBtn" href="https://play.google.com/store/apps/details?id=jp.co.nissan.nissanconnectservices" class="btn btn-googleplay">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
           <polygon points="5,3 19,12 5,21" />
         </svg>
         Get it on Google Play
       </a>
     </div>
-
     <p class="footer-text">Auto-redirects based on your device</p>
   </div>
 </body>
